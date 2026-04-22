@@ -1,0 +1,167 @@
+// Login Page
+// Provides magic link and Google OAuth authentication
+
+'use client'
+
+import { useState } from 'react'
+import { createClient } from '@/lib/supabase/client'
+import { authConfig } from '@/config/auth'
+
+export default function LoginPage() {
+  const [email, setEmail] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [message, setMessage] = useState('')
+  const supabase = createClient()
+
+  const handleMagicLink = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setLoading(true)
+    setMessage('')
+
+    const { error } = await supabase.auth.signInWithOtp({
+      email,
+      options: {
+        emailRedirectTo: `${window.location.origin}${authConfig.callbackUrl}`,
+      },
+    })
+
+    if (error) {
+      setMessage(`Error: ${error.message}`)
+    } else {
+      setMessage('Check your email for the magic link!')
+    }
+
+    setLoading(false)
+  }
+
+  const handleGoogleLogin = async () => {
+    setLoading(true)
+    
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: `${window.location.origin}${authConfig.callbackUrl}`,
+      },
+    })
+
+    if (error) {
+      setMessage(`Error: ${error.message}`)
+      setLoading(false)
+    }
+  }
+
+  return (
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      minHeight: '100vh',
+      padding: '20px',
+    }}>
+      <div style={{
+        width: '100%',
+        maxWidth: '400px',
+        padding: '40px',
+        border: '1px solid #e0e0e0',
+        borderRadius: '8px',
+      }}>
+        <h1 style={{ marginBottom: '30px', textAlign: 'center' }}>
+          Welcome to FocusLock
+        </h1>
+
+        <form onSubmit={handleMagicLink} style={{ marginBottom: '20px' }}>
+          <label htmlFor="email" style={{ display: 'block', marginBottom: '8px' }}>
+            Email
+          </label>
+          <input
+            id="email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="you@example.com"
+            required
+            disabled={loading}
+            style={{
+              width: '100%',
+              padding: '10px',
+              marginBottom: '15px',
+              border: '1px solid #ccc',
+              borderRadius: '4px',
+              fontSize: '16px',
+            }}
+          />
+          <button
+            type="submit"
+            disabled={loading}
+            style={{
+              width: '100%',
+              padding: '12px',
+              backgroundColor: '#0070f3',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              fontSize: '16px',
+              cursor: loading ? 'not-allowed' : 'pointer',
+              opacity: loading ? 0.6 : 1,
+            }}
+          >
+            {loading ? 'Sending...' : 'Send Magic Link'}
+          </button>
+        </form>
+
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          margin: '20px 0',
+        }}>
+          <div style={{ flex: 1, height: '1px', backgroundColor: '#e0e0e0' }} />
+          <span style={{ padding: '0 10px', color: '#666' }}>OR</span>
+          <div style={{ flex: 1, height: '1px', backgroundColor: '#e0e0e0' }} />
+        </div>
+
+        <button
+          onClick={handleGoogleLogin}
+          disabled={loading}
+          style={{
+            width: '100%',
+            padding: '12px',
+            backgroundColor: 'white',
+            color: '#333',
+            border: '1px solid #ccc',
+            borderRadius: '4px',
+            fontSize: '16px',
+            cursor: loading ? 'not-allowed' : 'pointer',
+            opacity: loading ? 0.6 : 1,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '10px',
+          }}
+        >
+          <svg width="18" height="18" viewBox="0 0 18 18">
+            <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z"/>
+            <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z"/>
+            <path fill="#FBBC05" d="M3.964 10.707c-.18-.54-.282-1.117-.282-1.707 0-.593.102-1.17.282-1.709V4.958H.957C.347 6.173 0 7.548 0 9c0 1.452.348 2.827.957 4.042l3.007-2.335z"/>
+            <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z"/>
+          </svg>
+          Continue with Google
+        </button>
+
+        {message && (
+          <div style={{
+            marginTop: '20px',
+            padding: '12px',
+            backgroundColor: message.startsWith('Error') ? '#fee' : '#efe',
+            border: `1px solid ${message.startsWith('Error') ? '#fcc' : '#cfc'}`,
+            borderRadius: '4px',
+            color: message.startsWith('Error') ? '#c00' : '#060',
+            fontSize: '14px',
+          }}>
+            {message}
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
