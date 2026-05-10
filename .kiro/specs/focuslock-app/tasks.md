@@ -13,7 +13,7 @@ The implementation follows a phased approach:
 
 ## Tasks
 
-- [ ] 1. Project setup and infrastructure
+- [x] 1. Project setup and infrastructure
   - [x] 1.1 Initialize Next.js 14 project with App Router
     - Create Next.js project with TypeScript
     - Configure app directory structure
@@ -45,7 +45,7 @@ The implementation follows a phased approach:
     - **Property 3: Lock Rule Validation by Type**
     - **Validates: Requirements 2.1, 2.3, 2.4, 2.5, 2.6**
 
-- [ ] 2. Core business logic implementation
+- [x] 2. Core business logic implementation
   - [x] 2.1 Implement lockEvaluator module
     - Write evaluateLock function with support for all lock types (timer, schedule, until_date, nuclear)
     - Implement timezone conversion utilities
@@ -102,7 +102,7 @@ The implementation follows a phased approach:
 - [x] 3. Checkpoint - Core logic validation
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 4. API routes implementation
+- [x] 4. API routes implementation
   - [x] 4.1 Implement lock rules API
     - Create GET /api/rules (fetch all user rules)
     - Create POST /api/rules (create new rule with validation)
@@ -111,7 +111,7 @@ The implementation follows a phased approach:
     - Add Zod schema validation
     - _Requirements: 2.1-2.12_
 
-  - [ ] 4.2 Write property tests for lock rules API
+  - [x] 4.2 Write property tests for lock rules API
     - **Property 4: Lock Rule Configuration Persistence**
     - **Validates: Requirements 2.7, 2.8, 2.9**
     - **Property 5: Lock Rule Update Round-Trip**
@@ -119,23 +119,23 @@ The implementation follows a phased approach:
     - **Property 6: Lock Rule Deletion Cascade**
     - **Validates: Requirements 2.11**
 
-  - [ ] 4.3 Implement override API
+  - [x] 4.3 Implement override API
     - Create POST /api/override (log override with mood)
     - Integrate with streakManager to reset streak
     - Trigger buddy notifications via Supabase Realtime
     - _Requirements: 4.1-4.6_
 
-  - [ ] 4.4 Write property tests for override API
+  - [x] 4.4 Write property tests for override API
     - **Property 12: Override Log Completeness**
     - **Validates: Requirements 4.4**
 
-  - [ ] 4.5 Implement usage sessions API
+  - [x] 4.5 Implement usage sessions API
     - Create POST /api/usage/start (start session)
     - Create POST /api/usage/end (end session and calculate duration)
     - Create GET /api/usage/daily (aggregate daily usage)
     - _Requirements: 5.1-5.4_
 
-  - [ ] 4.6 Write property tests for usage sessions
+  - [x] 4.6 Write property tests for usage sessions
     - **Property 13: Usage Session Start Recording**
     - **Validates: Requirements 5.1**
     - **Property 14: Usage Session Duration Calculation**
@@ -143,35 +143,35 @@ The implementation follows a phased approach:
     - **Property 15: Daily Usage Aggregation**
     - **Validates: Requirements 5.3**
 
-  - [ ] 4.7 Implement streak API
+  - [x] 4.7 Implement streak API
     - Create GET /api/streak (fetch user streak)
     - Create POST /api/streak/check (cron endpoint for daily checks)
     - Add authentication check for cron secret
     - _Requirements: 6.1-6.7_
 
-  - [ ] 4.8 Implement stats API
+  - [x] 4.8 Implement stats API
     - Create GET /api/stats (weekly aggregated statistics)
     - Calculate daily usage by app, per-app breakdown, week-over-week comparison, compliance percentage, time saved
     - _Requirements: 18.1-18.5_
 
-  - [ ] 4.9 Write property tests for stats calculations
+  - [x] 4.9 Write property tests for stats calculations
     - **Property 33: Statistics Calculation Accuracy**
     - **Validates: Requirements 18.1, 18.2, 18.3, 18.4, 18.5**
 
-  - [ ] 4.10 Implement AI coach API
+  - [x] 4.10 Implement AI coach API
     - Create POST /api/ai-coach (generate insights)
     - Integrate with aiCoach module
     - Add rate limiting (1 request/hour per user)
     - _Requirements: 10.1-10.8_
 
-  - [ ] 4.11 Implement buddy API
+  - [x] 4.11 Implement buddy API
     - Create POST /api/buddy/invite (send invitation)
     - Create POST /api/buddy/accept (accept invitation)
     - Create POST /api/buddy/notify (fire notifications)
     - Create GET /api/buddy/notifications (fetch notifications)
     - _Requirements: 9.1-9.9_
 
-  - [ ] 4.12 Write property tests for buddy system
+  - [x] 4.12 Write property tests for buddy system
     - **Property 25: Buddy Relationship Initial State**
     - **Validates: Requirements 9.1**
     - **Property 26: Buddy Relationship State Transition**
@@ -181,13 +181,13 @@ The implementation follows a phased approach:
     - **Property 28: Buddy Notification Creation**
     - **Validates: Requirements 9.4**
 
-  - [ ] 4.13 Implement Pomodoro API
+  - [x] 4.13 Implement Pomodoro API
     - Create POST /api/pomodoro/start (start session)
     - Create POST /api/pomodoro/complete-block (increment sessions_done)
     - Create POST /api/pomodoro/end (mark completed or abandoned)
     - _Requirements: 8.1-8.7_
 
-  - [ ] 4.14 Write property tests for Pomodoro sessions
+  - [x] 4.14 Write property tests for Pomodoro sessions
     - **Property 22: Pomodoro Session Recording**
     - **Validates: Requirements 8.1**
     - **Property 23: Pomodoro Session Counter Increment**
@@ -195,13 +195,13 @@ The implementation follows a phased approach:
     - **Property 24: Pomodoro Session Completion**
     - **Validates: Requirements 8.6**
 
-  - [ ] 4.15 Implement weekly challenge API
+  - [x] 4.15 Implement weekly challenge API
     - Create POST /api/challenge/generate (cron endpoint)
     - Create GET /api/challenge/current (fetch active challenge)
     - Create POST /api/challenge/update-progress (daily progress tracking)
     - _Requirements: 11.1-11.7_
 
-  - [ ] 4.16 Write property tests for weekly challenges
+  - [x] 4.16 Write property tests for weekly challenges
     - **Property 29: Worst App Identification**
     - **Validates: Requirements 11.2**
     - **Property 30: Weekly Challenge Structure**
@@ -211,380 +211,380 @@ The implementation follows a phased approach:
     - **Property 32: Challenge Completion Status**
     - **Validates: Requirements 11.5**
 
-  - [ ] 4.17 Implement share card API
+  - [x] 4.17 Implement share card API
     - Create GET /api/share-card (generate shareable stats card)
     - Return JSON with time saved, compliance %, streak, watermark
     - _Requirements: 14.1-14.4_
 
-  - [ ] 4.18 Implement family mode API
+  - [x] 4.18 Implement family mode API
     - Create POST /api/family/add-child (link child account)
     - Create GET /api/family/children (list child accounts)
     - Create GET /api/family/child-stats (child compliance stats)
     - _Requirements: 16.1-16.6_
 
-  - [ ] 4.19 Implement data export API
+  - [x] 4.19 Implement data export API
     - Create GET /api/export (generate JSON export of all user data)
     - Include lock_rules, override_logs, usage_sessions, streaks, badges, buddies, pomodoro_sessions
     - _Requirements: 22.1-22.5_
 
-  - [ ] 4.20 Write property tests for data export
+  - [x] 4.20 Write property tests for data export
     - **Property 34: Data Export Completeness**
     - **Validates: Requirements 22.1**
 
-- [ ] 5. Checkpoint - API layer validation
+- [x] 5. Checkpoint - API layer validation
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 6. Frontend components implementation
-  - [ ] 6.1 Create AppGrid component
+- [x] 6. Frontend components implementation
+  - [x] 6.1 Create AppGrid component
     - Display apps in grid layout
     - Filter hidden apps based on lock rules
     - Show lock badge overlay on locked apps
     - _Requirements: 2.7, 2.8_
 
-  - [ ] 6.2 Create LockCard component
+  - [x] 6.2 Create LockCard component
     - Display app icon, name, and lock status
     - Visual states for different lock types
     - Click handler to navigate to countdown screen
     - _Requirements: 3.1-3.8_
 
-  - [ ] 6.3 Create CountdownRing component
+  - [x] 6.3 Create CountdownRing component
     - SVG-based circular progress indicator
     - Animate countdown to unlock time
     - Display time remaining in human-readable format
     - _Requirements: 3.1-3.8_
 
-  - [ ] 6.4 Create MoodPrompt component
+  - [x] 6.4 Create MoodPrompt component
     - Modal dialog with mood selection buttons (bored, stressed, tired, news, other)
     - Optional textarea for reason text
     - Validation for strict mode (minimum 10 characters)
     - _Requirements: 4.1-4.6, 17.1-17.4_
 
-  - [ ] 6.5 Create RuleBuilder component
+  - [x] 6.5 Create RuleBuilder component
     - Multi-step form for creating/editing lock rules
     - Dynamic fields based on selected lock_type
     - Validation for schedule times, daily limits, unlock dates
     - Visibility and strict mode toggles
     - _Requirements: 2.1-2.12_
 
-  - [ ] 6.6 Create PomodoroTimer component
+  - [x] 6.6 Create PomodoroTimer component
     - Work/break cycle timer with visual ring
     - Session counter display
     - Start, pause, abandon controls
     - _Requirements: 8.1-8.7_
 
-  - [ ] 6.7 Create StatsChart component
+  - [x] 6.7 Create StatsChart component
     - Bar chart showing daily usage by app
     - Week-over-week comparison
     - Per-app breakdown table
     - _Requirements: 18.1-18.5_
 
-  - [ ] 6.8 Create BadgeCard component
+  - [x] 6.8 Create BadgeCard component
     - Display badge icon, name, description
     - Visual states: earned (color), locked (grayscale)
     - Show earned date or unlock condition
     - _Requirements: 7.1-7.6_
 
-  - [ ] 6.9 Create StreakDots component
+  - [x] 6.9 Create StreakDots component
     - Visual representation of last 7 days
     - Display current and longest streak numbers
     - _Requirements: 6.1-6.7_
 
-  - [ ] 6.10 Create BuddyPanel component
+  - [x] 6.10 Create BuddyPanel component
     - List of active buddies with status indicators
     - Invite form with email input
     - Rule selection checkboxes for watching
     - _Requirements: 9.1-9.9_
 
-  - [ ] 6.11 Create AIInsightCard component
+  - [x] 6.11 Create AIInsightCard component
     - Display Claude-generated insights
     - Mood pattern visualization (bar chart)
     - Actionable suggestion with CTA button
     - _Requirements: 10.1-10.8_
 
-  - [ ] 6.12 Create ShareCard component
+  - [x] 6.12 Create ShareCard component
     - Generate shareable progress image
     - Show time saved, compliance %, streak
     - Include FocusLock watermark
     - Export options: WhatsApp, Instagram, PNG download
     - _Requirements: 14.1-14.4_
 
-- [ ] 7. Frontend pages implementation
-  - [ ] 7.1 Create login page (/login)
+- [x] 7. Frontend pages implementation
+  - [x] 7.1 Create login page (/login)
     - Magic link email form
     - Google OAuth button
     - Redirect to dashboard after auth
     - _Requirements: 1.1, 1.2_
 
-  - [ ] 7.2 Create auth callback route (/callback)
+  - [x] 7.2 Create auth callback route (/callback)
     - Handle Supabase auth callback
     - Create profile record if new user
     - Redirect to onboarding or dashboard
     - _Requirements: 1.3, 1.4_
 
-  - [ ] 7.3 Write property tests for profile creation
+  - [x] 7.3 Write property tests for profile creation
     - **Property 1: Profile Creation Completeness**
     - **Validates: Requirements 1.3**
     - **Property 2: Profile Update Round-Trip**
     - **Validates: Requirements 1.5**
 
-  - [ ] 7.4 Create dashboard page (/dashboard)
+  - [x] 7.4 Create dashboard page (/dashboard)
     - Display AppGrid with locked/unlocked apps
     - Show current streak and badges summary
     - Quick actions: add rule, start Pomodoro
     - _Requirements: 2.1-2.12, 3.1-3.8, 6.1-6.7, 7.1-7.6_
 
-  - [ ] 7.5 Create lock screen page (/lock/[appId])
+  - [x] 7.5 Create lock screen page (/lock/[appId])
     - Display CountdownRing with time remaining
     - Show lock type badge and reason
     - Emergency override button (if not nuclear mode)
     - Set reminder button for unlock notification
     - _Requirements: 3.1-3.8, 4.1-4.6, 13.1-13.6_
 
-  - [ ] 7.6 Create add lock rule page (/rules/new)
+  - [x] 7.6 Create add lock rule page (/rules/new)
     - Render RuleBuilder component
     - Handle form submission to POST /api/rules
     - Redirect to dashboard on success
     - _Requirements: 2.1-2.12_
 
-  - [ ] 7.7 Create edit lock rule page (/rules/[id])
+  - [x] 7.7 Create edit lock rule page (/rules/[id])
     - Fetch existing rule data
     - Render RuleBuilder with initial values
     - Handle form submission to PUT /api/rules/[id]
     - Add delete button with confirmation
     - _Requirements: 2.1-2.12_
 
-  - [ ] 7.8 Create Pomodoro page (/focus)
+  - [x] 7.8 Create Pomodoro page (/focus)
     - Render PomodoroTimer component
     - Display task label input
     - Show active session progress
     - Lock all apps during work blocks
     - _Requirements: 8.1-8.7_
 
-  - [ ] 7.9 Create stats dashboard page (/stats)
+  - [x] 7.9 Create stats dashboard page (/stats)
     - Render StatsChart component
     - Display per-app breakdown table
     - Show week-over-week comparison
     - Display compliance percentage and time saved
     - _Requirements: 18.1-18.5_
 
-  - [ ] 7.10 Create badges page (/badges)
+  - [x] 7.10 Create badges page (/badges)
     - Display StreakDots component
     - Render grid of BadgeCard components (earned and locked)
     - Show badge descriptions and unlock conditions
     - _Requirements: 6.1-6.7, 7.1-7.6_
 
-  - [ ] 7.11 Create AI coach page (/ai-coach)
+  - [x] 7.11 Create AI coach page (/ai-coach)
     - Render AIInsightCard component
     - Display mood pattern chart
     - Show actionable suggestions
     - Add "Generate New Insights" button (rate limited)
     - _Requirements: 10.1-10.8_
 
-  - [ ] 7.12 Create buddy page (/buddy)
+  - [x] 7.12 Create buddy page (/buddy)
     - Render BuddyPanel component
     - Display buddy notifications list
     - Show watched rules for each buddy
     - _Requirements: 9.1-9.9_
 
-  - [ ] 7.13 Create share page (/share)
+  - [x] 7.13 Create share page (/share)
     - Render ShareCard component
     - Fetch weekly stats from API
     - Provide share buttons (WhatsApp, Instagram, download)
     - _Requirements: 14.1-14.4_
 
-  - [ ] 7.14 Create weekly challenge page (/challenge)
+  - [x] 7.14 Create weekly challenge page (/challenge)
     - Display active challenge progress
     - Show day-dot row (M T W T F) with completion status
     - Display challenge goal and current progress
     - _Requirements: 11.1-11.7_
 
-  - [ ] 7.15 Create bedtime mode page (/bedtime)
+  - [x] 7.15 Create bedtime mode page (/bedtime)
     - Bedtime schedule configuration form
     - Separate settings for weekdays and weekends
     - Display bedtime compliance streak
     - _Requirements: 12.1-12.7_
 
-  - [ ] 7.16 Create family mode page (/family)
+  - [x] 7.16 Create family mode page (/family)
     - Add child profile form
     - List child accounts with compliance stats
     - Display child override notifications
     - _Requirements: 16.1-16.6_
 
-  - [ ] 7.17 Create settings page (/settings)
+  - [x] 7.17 Create settings page (/settings)
     - Profile update form (name, avatar, timezone)
     - Notification preferences
     - Data export button
     - Account deletion button with confirmation
     - _Requirements: 1.5, 21.1-21.5, 22.1-22.5_
 
-- [ ] 8. Checkpoint - Frontend integration validation
+- [x] 8. Checkpoint - Frontend integration validation
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 9. Vercel Cron jobs implementation
-  - [ ] 9.1 Create daily streak check cron (/api/cron/streak-check)
+- [x] 9. Vercel Cron jobs implementation
+  - [x] 9.1 Create daily streak check cron (/api/cron/streak-check)
     - Schedule: 0 0 * * * (midnight UTC)
     - Call streakManager.checkAndUpdateStreaks()
     - Send buddy notifications for broken streaks
     - Authenticate with CRON_SECRET
     - _Requirements: 6.6_
 
-  - [ ] 9.2 Create weekly challenge generation cron (/api/cron/generate-challenges)
+  - [x] 9.2 Create weekly challenge generation cron (/api/cron/generate-challenges)
     - Schedule: 0 6 * * 1 (Monday 6 AM UTC)
     - Identify worst app from previous week
     - Create new challenge with 5-day goal
     - Send notification to user
     - _Requirements: 11.1-11.7_
 
-  - [ ] 9.3 Create bedtime mode check cron (/api/cron/bedtime-check)
+  - [x] 9.3 Create bedtime mode check cron (/api/cron/bedtime-check)
     - Schedule: */15 * * * * (every 15 minutes)
     - Check users with bedtime mode enabled
     - Activate/deactivate locks at configured times
     - _Requirements: 12.1-12.7_
 
-  - [ ] 9.4 Create weekly AI insights cron (/api/cron/weekly-insights)
+  - [x] 9.4 Create weekly AI insights cron (/api/cron/weekly-insights)
     - Schedule: 0 9 * * 1 (Monday 9 AM UTC)
     - Generate AI insights for active users
     - Cache insights for dashboard display
     - _Requirements: 10.1-10.8_
 
-  - [ ] 9.5 Configure vercel.json with cron schedules
+  - [x] 9.5 Configure vercel.json with cron schedules
     - Add all 4 cron job configurations
     - Set up environment variables for CRON_SECRET
     - _Requirements: 6.6, 11.1, 12.1, 10.1_
 
-- [ ] 10. Browser extension implementation
-  - [ ] 10.1 Create Chrome extension manifest (Manifest V3)
+- [x] 10. Browser extension implementation
+  - [x] 10.1 Create Chrome extension manifest (Manifest V3)
     - Define permissions: storage, alarms, tabs
     - Configure host_permissions for all URLs
     - Set up background service worker
     - Configure content scripts
     - _Requirements: 15.1-15.7_
 
-  - [ ] 10.2 Implement background service worker
+  - [x] 10.2 Implement background service worker
     - Sync lock rules from FocusLock API every 5 minutes
     - Evaluate lock status for current tab
     - Manage alarms for scheduled unlocks
     - Handle messages from content script and popup
     - _Requirements: 15.4, 15.5, 15.7_
 
-  - [ ] 10.3 Implement content script
+  - [x] 10.3 Implement content script
     - Intercept page load for locked domains
     - Replace page with countdown UI
     - Listen for unlock events from background
     - Handle mood prompt for overrides
     - _Requirements: 15.6, 15.7_
 
-  - [ ] 10.4 Implement popup UI
+  - [x] 10.4 Implement popup UI
     - Show current lock status
     - Quick toggle for rules
     - Link to web app dashboard
     - Sync status indicator
     - _Requirements: 15.1-15.7_
 
-  - [ ] 10.5 Create Firefox WebExtension version
+  - [x] 10.5 Create Firefox WebExtension version
     - Adapt manifest for Firefox compatibility
     - Test cross-browser compatibility
     - _Requirements: 15.2_
 
-  - [ ] 10.6 Implement extension authentication
+  - [x] 10.6 Implement extension authentication
     - API token generation and storage
     - Secure token storage in encrypted storage
     - Token refresh mechanism
     - _Requirements: 15.3_
 
-- [ ] 11. PWA configuration
-  - [ ] 11.1 Create PWA manifest (public/manifest.json)
+- [x] 11. PWA configuration
+  - [x] 11.1 Create PWA manifest (public/manifest.json)
     - Define app name, short_name, description
     - Configure icons (192x192, 512x512)
     - Set display mode to standalone
     - Set theme and background colors
     - _Requirements: 19.1_
 
-  - [ ] 11.2 Implement service worker
+  - [x] 11.2 Implement service worker
     - Cache strategy: Network-first for API, Cache-first for static assets
     - Offline fallback for lock rules and countdown screens
     - Background sync for queued override logs
     - _Requirements: 19.2, 19.4, 19.5_
 
-  - [ ] 11.3 Configure Next.js for PWA
+  - [x] 11.3 Configure Next.js for PWA
     - Install next-pwa package
     - Configure next.config.js
     - Test PWA installation on mobile devices
     - _Requirements: 19.3_
 
-- [ ] 12. Onboarding flow implementation
-  - [ ] 12.1 Create onboarding wizard component
+- [x] 12. Onboarding flow implementation
+  - [x] 12.1 Create onboarding wizard component
     - 3-step wizard: add first rule, explain mood prompt, introduce streaks/badges
     - Progress indicator
     - Skip button
     - _Requirements: 20.1-20.6_
 
-  - [ ] 12.2 Integrate onboarding with auth callback
+  - [x] 12.2 Integrate onboarding with auth callback
     - Show onboarding for new users
     - Track onboarding completion time
     - Award quick_start badge if completed within 10 minutes
     - _Requirements: 20.1, 20.5_
 
-- [ ] 13. Notification system implementation
-  - [ ] 13.1 Implement browser notifications
+- [x] 13. Notification system implementation
+  - [x] 13.1 Implement browser notifications
     - Request notification permission
     - Send notification when app is about to unlock
     - Send notification when buddy overrides watched rule
     - Send notification when user earns new badge
     - _Requirements: 21.1-21.5_
 
-  - [ ] 13.2 Implement Supabase Realtime subscriptions
+  - [x] 13.2 Implement Supabase Realtime subscriptions
     - Subscribe to buddy_notifications table
     - Display real-time notifications in UI
     - Mark notifications as read
     - _Requirements: 9.5, 21.2, 21.3_
 
-  - [ ] 13.3 Create notification preferences UI
+  - [x] 13.3 Create notification preferences UI
     - Toggle for each notification type
     - Save preferences to user profile
     - _Requirements: 21.5_
 
-- [ ] 14. Styling and UI polish
-  - [ ] 14.1 Create global CSS styles
+- [x] 14. Styling and UI polish
+  - [x] 14.1 Create global CSS styles
     - Define color palette and typography
     - Create utility classes
     - Set up CSS variables for theming
     - _Requirements: All_
 
-  - [ ] 14.2 Implement dark mode support
+  - [x] 14.2 Implement dark mode support
     - Create dark mode color scheme
     - Add theme toggle in settings
     - Persist theme preference
     - _Requirements: All_
 
-  - [ ] 14.3 Create component-specific CSS
+  - [x] 14.3 Create component-specific CSS
     - dashboard.css, lock.css, stats.css, focus.css, family.css
     - Ensure responsive design for mobile, tablet, desktop
     - _Requirements: All_
 
-  - [ ] 14.4 Add animations and transitions
+  - [x] 14.4 Add animations and transitions
     - Countdown ring animation
     - Badge unlock animation
     - Page transitions
     - _Requirements: All_
 
-- [ ] 15. Checkpoint - Full feature validation
+- [x] 15. Checkpoint - Full feature validation
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 16. Integration testing
-  - [ ] 16.1 Write integration tests for API routes
+- [x] 16. Integration testing
+  - [x] 16.1 Write integration tests for API routes
     - Test all API endpoints with database interactions
     - Test RLS policies with different user contexts
     - Test authentication flows
     - Test Realtime subscriptions
 
-  - [ ] 16.2 Write integration tests for cron jobs
+  - [x] 16.2 Write integration tests for cron jobs
     - Test streak check cron with mock data
     - Test challenge generation cron
     - Test bedtime mode cron
     - Test AI insights cron
 
-- [ ] 17. End-to-end testing
+- [ ] 17. End-to-end testing 
   - [ ] 17.1 Write E2E tests for critical user flows
     - Test onboarding flow
     - Test creating lock rule
@@ -691,7 +691,7 @@ The implementation follows a phased approach:
     - Optimize Core Web Vitals (LCP <2.5s, FID <100ms, CLS <0.1)
     - _Requirements: All_
 
-- [ ] 22. Final checkpoint - Production readiness
+- [x] 22. Final checkpoint - Production readiness
   - Ensure all tests pass, ask the user if questions arise.
 
 ## Notes

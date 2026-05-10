@@ -1,5 +1,13 @@
 // Jest setup file for global test configuration
 
+// Import testing-library matchers (for React component tests)
+// Note: This may not work in node environment, but we'll keep it for compatibility
+try {
+  require('@testing-library/jest-dom');
+} catch (e) {
+  // Ignore if not available in node environment
+}
+
 // Set test timeout to 30 seconds for database operations
 jest.setTimeout(30000);
 

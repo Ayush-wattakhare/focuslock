@@ -287,12 +287,11 @@ async function countCompletedPomodoros(userId: string): Promise<number> {
  * @param badge - Badge that was earned
  */
 async function sendBadgeNotification(userId: string, badge: BadgeDefinition): Promise<void> {
-  // This would integrate with a notification system
-  // For now, we'll just log it
-  console.log(`Badge earned: ${badge.name} for user ${userId}`);
+  // Import notification service dynamically to avoid SSR issues
+  if (typeof window !== 'undefined') {
+    const { sendBadgeEarnedNotification } = await import('./notificationService');
+    await sendBadgeEarnedNotification(badge.name, badge.icon || '🏆');
+  }
   
-  // In a real implementation, this would:
-  // 1. Create an in-app notification
-  // 2. Send a push notification if enabled
-  // 3. Trigger any UI updates via real-time subscriptions
+  console.log(`Badge earned: ${badge.name} for user ${userId}`);
 }

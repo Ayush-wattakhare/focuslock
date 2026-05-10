@@ -1,63 +1,45 @@
 // Dashboard Page
-// Main application dashboard (protected route)
+// Main application dashboard (works with or without login)
 
 import { createClient } from '@/lib/supabase/server'
-import { redirect } from 'next/navigation'
+import DashboardClient from './DashboardClient'
 
 export default async function DashboardPage() {
   const supabase = await createClient()
   
   const { data: { user } } = await supabase.auth.getUser()
   
-  if (!user) {
-    redirect('/')
+  // If user is logged in, fetch their data from Supabase
+  if (user) {
+    // Get user profile
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('*')
+      .eq('id', user.id)
+      .maybeSingle()
+
+    // Fetch lock rules for the user
+    const { data: rules } = await supabase
+      .from('lock_rules')
+      .select('*')
+      .eq('user_id', user.id)
+      .order('created_at', { ascending: false })
+
+    return (
+      <DashboardClient 
+        user={user} 
+        profile={profile} 
+        initialRules={rules || []} 
+      />
+    )
   }
   
-  // Get user profile
-  const { data: profile } = await supabase
-    .from('profiles')
-    .select('*')
-    .eq('id', user.id)
-    .maybeSingle()
-
+  // Guest mode - data will be loaded from localStorage on client side
   return (
-    <div style={{ padding: '40px' }}>
-      <h1>Dashboard</h1>
-      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-      <p>Welcome, {(profile as any)?.full_name || user.email}!</p>
-      <p>This is a protected route. You are authenticated.</p>
-      
-      <div style={{ marginTop: '20px' }}>
-        <h2>User Info:</h2>
-        <pre style={{ 
-          backgroundColor: '#f5f5f5', 
-          padding: '15px', 
-          borderRadius: '4px',
-          overflow: 'auto'
-        }}>
-          {JSON.stringify({ 
-            id: user.id, 
-            email: user.email,
-            profile 
-          }, null, 2)}
-        </pre>
-      </div>
-      
-      <form action="/auth/signout" method="post" style={{ marginTop: '20px' }}>
-        <button 
-          type="submit"
-          style={{
-            padding: '10px 20px',
-            backgroundColor: '#dc3545',
-            color: 'white',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: 'pointer',
-          }}
-        >
-          Sign Out
-        </button>
-      </form>
-    </div>
+    <DashboardClient 
+      user={null} 
+      profile={null} 
+      initialRules={[]} 
+    />
   )
 }

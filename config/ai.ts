@@ -22,10 +22,15 @@ export const AI_CONFIG = {
   },
 } as const;
 
+// Check if AI features are enabled
+export function isAIEnabled(): boolean {
+  return !!process.env.ANTHROPIC_API_KEY && process.env.ANTHROPIC_API_KEY !== 'sk-ant-placeholder-key';
+}
+
 // Validate that required environment variables are set
 export function validateAIConfig() {
-  if (!process.env.ANTHROPIC_API_KEY) {
-    throw new Error('ANTHROPIC_API_KEY environment variable is not set');
+  if (!isAIEnabled()) {
+    throw new Error('AI coaching is not available. ANTHROPIC_API_KEY is not configured. This is a paid service from Anthropic.');
   }
 }
 

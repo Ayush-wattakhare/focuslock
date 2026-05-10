@@ -1,0 +1,262 @@
+/* ============================================
+   Lock Screen Page Styles
+   ============================================ */
+
+.lock-screen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-800) 100%);
+  padding: var(--space-6);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated background pattern */
+.lock-screen::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+  animation: float 20s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(20px, 20px); }
+}
+
+.lock-content {
+  position: relative;
+  z-index: 1;
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+}
+
+/* App Info */
+.lock-app-info {
+  margin-bottom: var(--space-8);
+}
+
+.lock-app-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-2xl);
+  margin: 0 auto var(--space-4);
+  box-shadow: var(--shadow-xl);
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-4xl);
+}
+
+.lock-app-name {
+  font-size: var(--text-3xl);
+  font-weight: var(--font-bold);
+  color: white;
+  margin-bottom: var(--space-2);
+}
+
+.lock-type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: var(--radius-full);
+  color: white;
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+}
+
+/* Countdown Ring */
+.countdown-section {
+  margin-bottom: var(--space-8);
+}
+
+.countdown-ring-wrapper {
+  position: relative;
+  width: 240px;
+  height: 240px;
+  margin: 0 auto var(--space-6);
+}
+
+.countdown-time {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: var(--text-4xl);
+  font-weight: var(--font-bold);
+  color: white;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.countdown-label {
+  font-size: var(--text-lg);
+  color: rgba(255, 255, 255, 0.9);
+  margin-top: var(--space-2);
+}
+
+/* Lock Reason */
+.lock-reason {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-xl);
+  padding: var(--space-4);
+  color: white;
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-8);
+}
+
+/* Action Buttons */
+.lock-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.lock-btn {
+  width: 100%;
+  padding: var(--space-4);
+  font-size: var(--text-base);
+  font-weight: var(--font-semibold);
+  border-radius: var(--radius-lg);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.lock-btn-primary {
+  background: white;
+  color: var(--primary-600);
+}
+
+.lock-btn-primary:hover {
+  background: rgba(255, 255, 255, 0.9);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.lock-btn-secondary {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.lock-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.lock-btn-danger {
+  background: var(--error-500);
+  color: white;
+}
+
+.lock-btn-danger:hover {
+  background: var(--error-600);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.lock-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* Nuclear Mode Indicator */
+.nuclear-mode-indicator {
+  background: rgba(239, 68, 68, 0.2);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(239, 68, 68, 0.5);
+  border-radius: var(--radius-xl);
+  padding: var(--space-4);
+  color: white;
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-6);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.nuclear-icon {
+  font-size: var(--text-2xl);
+}
+
+/* Back Button */
+.lock-back-btn {
+  position: absolute;
+  top: var(--space-6);
+  left: var(--space-6);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-lg);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.lock-back-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .lock-screen {
+    padding: var(--space-4);
+  }
+
+  .lock-app-icon {
+    width: 64px;
+    height: 64px;
+  }
+
+  .lock-app-name {
+    font-size: var(--text-2xl);
+  }
+
+  .countdown-ring-wrapper {
+    width: 200px;
+    height: 200px;
+  }
+
+  .countdown-time {
+    font-size: var(--text-3xl);
+  }
+
+  .lock-back-btn {
+    top: var(--space-4);
+    left: var(--space-4);
+  }
+}
+
+@media (max-width: 480px) {
+  .countdown-ring-wrapper {
+    width: 180px;
+    height: 180px;
+  }
+
+  .countdown-time {
+    font-size: var(--text-2xl);
+  }
+}

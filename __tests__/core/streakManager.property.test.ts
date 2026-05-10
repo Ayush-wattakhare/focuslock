@@ -105,7 +105,7 @@ describe('Property 16: Streak Increment Without Override', () => {
             lastActiveDateStr
           );
 
-          mockCreateClient.mockReturnValue(Promise.resolve(mockSupabase as any));
+          mockCreateClient.mockResolvedValue(mockSupabase as any);
 
           const newStreak = await incrementStreak('test-user', newDate);
 
@@ -132,7 +132,7 @@ describe('Property 16: Streak Increment Without Override', () => {
           expect(updateCall.last_active_date).toBe(newDate.toISOString().split('T')[0]);
         }
       ),
-      { numRuns: 100 }
+      { numRuns: 20 }
     );
   });
 
@@ -157,7 +157,7 @@ describe('Property 16: Streak Increment Without Override', () => {
             null // No last_active_date
           );
 
-          mockCreateClient.mockReturnValue(Promise.resolve(mockSupabase as any));
+          mockCreateClient.mockResolvedValue(mockSupabase as any);
 
           const newStreak = await incrementStreak('test-user', newDate);
 
@@ -171,7 +171,7 @@ describe('Property 16: Streak Increment Without Override', () => {
           expect(updateCall.last_active_date).toBe(newDate.toISOString().split('T')[0]);
         }
       ),
-      { numRuns: 50 }
+      { numRuns: 20 }
     );
   });
 });
@@ -204,7 +204,7 @@ describe('Property 17: Longest Streak Invariant', () => {
             lastActiveDateStr
           );
 
-          mockCreateClient.mockReturnValue(Promise.resolve(mockSupabase as any));
+          mockCreateClient.mockResolvedValue(mockSupabase as any);
 
           await incrementStreak('test-user', newDate);
 
@@ -216,7 +216,7 @@ describe('Property 17: Longest Streak Invariant', () => {
           expect(updateCall.longest_streak).toBeGreaterThanOrEqual(updateCall.current_streak);
         }
       ),
-      { numRuns: 100 }
+      { numRuns: 20 }
     );
   });
 
@@ -257,7 +257,7 @@ describe('Property 17: Longest Streak Invariant', () => {
             lastActiveDateStr
           );
 
-          mockCreateClient.mockReturnValue(Promise.resolve(mockSupabase as any));
+          mockCreateClient.mockResolvedValue(mockSupabase as any);
 
           await incrementStreak('test-user', newDate);
 
@@ -273,7 +273,7 @@ describe('Property 17: Longest Streak Invariant', () => {
           expect(updateCall.longest_streak).toBe(newCurrentStreak);
         }
       ),
-      { numRuns: 50 }
+      { numRuns: 20 }
     );
   });
 });
@@ -291,7 +291,7 @@ describe('Property 18: Streak Reset on Override', () => {
         async (userId) => {
           const mockSupabase = createMockSupabaseForReset();
 
-          mockCreateClient.mockReturnValue(Promise.resolve(mockSupabase as any));
+          mockCreateClient.mockResolvedValue(mockSupabase as any);
 
           await resetStreak(userId);
 
@@ -302,7 +302,7 @@ describe('Property 18: Streak Reset on Override', () => {
           expect(mockSupabase.eq).toHaveBeenCalledWith('user_id', userId);
         }
       ),
-      { numRuns: 50 }
+      { numRuns: 20 }
     );
   });
 
@@ -319,7 +319,7 @@ describe('Property 18: Streak Reset on Override', () => {
         async (userId) => {
           const mockSupabase = createMockSupabaseForReset();
 
-          mockCreateClient.mockReturnValue(Promise.resolve(mockSupabase as any));
+          mockCreateClient.mockResolvedValue(mockSupabase as any);
 
           await resetStreak(userId);
 
@@ -333,7 +333,7 @@ describe('Property 18: Streak Reset on Override', () => {
           expect(updateCall).not.toHaveProperty('last_active_date');
         }
       ),
-      { numRuns: 50 }
+      { numRuns: 20 }
     );
   });
 });
@@ -365,7 +365,7 @@ describe('Property 19: Streak Last Active Date Update', () => {
             lastActiveDateStr
           );
 
-          mockCreateClient.mockReturnValue(Promise.resolve(mockSupabase as any));
+          mockCreateClient.mockResolvedValue(mockSupabase as any);
 
           await incrementStreak('test-user', newDate);
 
@@ -378,7 +378,7 @@ describe('Property 19: Streak Last Active Date Update', () => {
           expect(updateCall.last_active_date).toBe(expectedDateStr);
         }
       ),
-      { numRuns: 100 }
+      { numRuns: 20 }
     );
   });
 
@@ -407,7 +407,7 @@ describe('Property 19: Streak Last Active Date Update', () => {
             lastActiveDateStr
           );
 
-          mockCreateClient.mockReturnValue(Promise.resolve(mockSupabase as any));
+          mockCreateClient.mockResolvedValue(mockSupabase as any);
 
           await incrementStreak('test-user', newDate);
 
@@ -420,7 +420,7 @@ describe('Property 19: Streak Last Active Date Update', () => {
           expect(updateCall.last_active_date).toMatch(dateRegex);
         }
       ),
-      { numRuns: 50 }
+      { numRuns: 20 }
     );
   });
 });

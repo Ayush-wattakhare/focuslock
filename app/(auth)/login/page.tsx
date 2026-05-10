@@ -6,17 +6,18 @@
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { authConfig } from '@/config/auth'
+import Link from 'next/link'
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
-  const [message, setMessage] = useState('')
+  const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null)
   const supabase = createClient()
 
   const handleMagicLink = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
-    setMessage('')
+    setMessage(null)
 
     const { error } = await supabase.auth.signInWithOtp({
       email,
@@ -26,9 +27,9 @@ export default function LoginPage() {
     })
 
     if (error) {
-      setMessage(`Error: ${error.message}`)
+      setMessage({ type: 'error', text: error.message })
     } else {
-      setMessage('Check your email for the magic link!')
+      setMessage({ type: 'success', text: 'Check your email for the magic link!' })
     }
 
     setLoading(false)
@@ -36,6 +37,7 @@ export default function LoginPage() {
 
   const handleGoogleLogin = async () => {
     setLoading(true)
+    setMessage(null)
     
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
@@ -45,7 +47,7 @@ export default function LoginPage() {
     })
 
     if (error) {
-      setMessage(`Error: ${error.message}`)
+      setMessage({ type: 'error', text: error.message })
       setLoading(false)
     }
   }
@@ -58,21 +60,46 @@ export default function LoginPage() {
       justifyContent: 'center',
       minHeight: '100vh',
       padding: '20px',
+      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
     }}>
       <div style={{
         width: '100%',
-        maxWidth: '400px',
-        padding: '40px',
-        border: '1px solid #e0e0e0',
-        borderRadius: '8px',
+        maxWidth: '420px',
+        padding: '48px',
+        background: 'white',
+        borderRadius: '16px',
+        boxShadow: '0 10px 40px rgba(0, 0, 0, 0.2)',
       }}>
-        <h1 style={{ marginBottom: '30px', textAlign: 'center' }}>
-          Welcome to FocusLock
-        </h1>
+        <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+          <h1 style={{ 
+            fontSize: '2rem', 
+            fontWeight: '700',
+            margin: '0 0 8px 0',
+            color: '#1a202c',
+          }}>
+            🔒 Welcome to FocusLock
+          </h1>
+          <p style={{ 
+            margin: 0, 
+            color: '#718096',
+            fontSize: '0.95rem',
+          }}>
+            Sign in to start building better habits
+          </p>
+        </div>
 
-        <form onSubmit={handleMagicLink} style={{ marginBottom: '20px' }}>
-          <label htmlFor="email" style={{ display: 'block', marginBottom: '8px' }}>
-            Email
+        <form onSubmit={handleMagicLink} style={{ marginBottom: '24px' }}>
+          <label 
+            htmlFor="email" 
+            style={{ 
+              display: 'block', 
+              marginBottom: '8px',
+              fontSize: '0.875rem',
+              fontWeight: '500',
+              color: '#4a5568',
+            }}
+          >
+            Email address
           </label>
           <input
             id="email"
@@ -84,12 +111,17 @@ export default function LoginPage() {
             disabled={loading}
             style={{
               width: '100%',
-              padding: '10px',
-              marginBottom: '15px',
-              border: '1px solid #ccc',
-              borderRadius: '4px',
-              fontSize: '16px',
+              padding: '12px 16px',
+              marginBottom: '16px',
+              border: '2px solid #e2e8f0',
+              borderRadius: '8px',
+              fontSize: '1rem',
+              transition: 'border-color 0.2s',
+              outline: 'none',
+              boxSizing: 'border-box',
             }}
+            onFocus={(e) => e.target.style.borderColor = '#667eea'}
+            onBlur={(e) => e.target.style.borderColor = '#e2e8f0'}
           />
           <button
             type="submit"
@@ -97,13 +129,20 @@ export default function LoginPage() {
             style={{
               width: '100%',
               padding: '12px',
-              backgroundColor: '#0070f3',
+              backgroundColor: loading ? '#a0aec0' : '#667eea',
               color: 'white',
               border: 'none',
-              borderRadius: '4px',
-              fontSize: '16px',
+              borderRadius: '8px',
+              fontSize: '1rem',
+              fontWeight: '600',
               cursor: loading ? 'not-allowed' : 'pointer',
-              opacity: loading ? 0.6 : 1,
+              transition: 'background-color 0.2s',
+            }}
+            onMouseEnter={(e) => {
+              if (!loading) e.currentTarget.style.backgroundColor = '#5568d3'
+            }}
+            onMouseLeave={(e) => {
+              if (!loading) e.currentTarget.style.backgroundColor = '#667eea'
             }}
           >
             {loading ? 'Sending...' : 'Send Magic Link'}
@@ -113,11 +152,11 @@ export default function LoginPage() {
         <div style={{
           display: 'flex',
           alignItems: 'center',
-          margin: '20px 0',
+          margin: '24px 0',
         }}>
-          <div style={{ flex: 1, height: '1px', backgroundColor: '#e0e0e0' }} />
-          <span style={{ padding: '0 10px', color: '#666' }}>OR</span>
-          <div style={{ flex: 1, height: '1px', backgroundColor: '#e0e0e0' }} />
+          <div style={{ flex: 1, height: '1px', backgroundColor: '#e2e8f0' }} />
+          <span style={{ padding: '0 16px', color: '#a0aec0', fontSize: '0.875rem' }}>OR</span>
+          <div style={{ flex: 1, height: '1px', backgroundColor: '#e2e8f0' }} />
         </div>
 
         <button
@@ -127,19 +166,32 @@ export default function LoginPage() {
             width: '100%',
             padding: '12px',
             backgroundColor: 'white',
-            color: '#333',
-            border: '1px solid #ccc',
-            borderRadius: '4px',
-            fontSize: '16px',
+            color: '#1a202c',
+            border: '2px solid #e2e8f0',
+            borderRadius: '8px',
+            fontSize: '1rem',
+            fontWeight: '600',
             cursor: loading ? 'not-allowed' : 'pointer',
-            opacity: loading ? 0.6 : 1,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            gap: '10px',
+            gap: '12px',
+            transition: 'all 0.2s',
+          }}
+          onMouseEnter={(e) => {
+            if (!loading) {
+              e.currentTarget.style.borderColor = '#cbd5e0'
+              e.currentTarget.style.backgroundColor = '#f7fafc'
+            }
+          }}
+          onMouseLeave={(e) => {
+            if (!loading) {
+              e.currentTarget.style.borderColor = '#e2e8f0'
+              e.currentTarget.style.backgroundColor = 'white'
+            }
           }}
         >
-          <svg width="18" height="18" viewBox="0 0 18 18">
+          <svg width="20" height="20" viewBox="0 0 18 18">
             <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z"/>
             <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z"/>
             <path fill="#FBBC05" d="M3.964 10.707c-.18-.54-.282-1.117-.282-1.707 0-.593.102-1.17.282-1.709V4.958H.957C.347 6.173 0 7.548 0 9c0 1.452.348 2.827.957 4.042l3.007-2.335z"/>
@@ -150,17 +202,34 @@ export default function LoginPage() {
 
         {message && (
           <div style={{
-            marginTop: '20px',
-            padding: '12px',
-            backgroundColor: message.startsWith('Error') ? '#fee' : '#efe',
-            border: `1px solid ${message.startsWith('Error') ? '#fcc' : '#cfc'}`,
-            borderRadius: '4px',
-            color: message.startsWith('Error') ? '#c00' : '#060',
-            fontSize: '14px',
+            marginTop: '24px',
+            padding: '12px 16px',
+            backgroundColor: message.type === 'error' ? '#fff5f5' : '#f0fff4',
+            border: `1px solid ${message.type === 'error' ? '#fc8181' : '#9ae6b4'}`,
+            borderRadius: '8px',
+            color: message.type === 'error' ? '#c53030' : '#2f855a',
+            fontSize: '0.875rem',
           }}>
-            {message}
+            {message.text}
           </div>
         )}
+
+        <div style={{
+          marginTop: '24px',
+          textAlign: 'center',
+        }}>
+          <Link 
+            href="/"
+            style={{
+              color: '#667eea',
+              textDecoration: 'none',
+              fontSize: '0.875rem',
+              fontWeight: '500',
+            }}
+          >
+            ← Back to home
+          </Link>
+        </div>
       </div>
     </div>
   )

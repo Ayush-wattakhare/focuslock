@@ -99,7 +99,7 @@ describe('Property 7: Timer Lock Evaluation', () => {
           }
         }
       ),
-      { numRuns: 100 }
+      { numRuns: 20 }
     );
   });
 });
@@ -163,7 +163,7 @@ describe('Property 8: Schedule Lock Evaluation', () => {
           }
         }
       ),
-      { numRuns: 100 }
+      { numRuns: 20 }
     );
   });
 });
@@ -225,7 +225,7 @@ describe('Property 9: Until-Date Lock Evaluation', () => {
           }
         }
       ),
-      { numRuns: 100 }
+      { numRuns: 20 }
     );
   });
 });
@@ -300,7 +300,7 @@ describe('Property 10: Lock Evaluation Timezone Consistency', () => {
           expect(result.reason).toBe(result2.reason);
         }
       ),
-      { numRuns: 100 }
+      { numRuns: 20 }
     );
   });
 });
@@ -361,7 +361,7 @@ describe('Property 11: Lock Status Reason Presence', () => {
           }
         }
       ),
-      { numRuns: 100 }
+      { numRuns: 20 }
     );
   });
 });

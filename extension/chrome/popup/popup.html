@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FocusLock</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <div class="logo">
+        <span class="logo-icon">🔒</span>
+        <span class="logo-text">FocusLock</span>
+      </div>
+      <div class="sync-status" id="sync-status">
+        <span class="sync-icon">🔄</span>
+        <span class="sync-text">Syncing...</span>
+      </div>
+    </div>
+    
+    <!-- Authentication Section -->
+    <div id="auth-section" class="section" style="display: none;">
+      <h2>Connect to FocusLock</h2>
+      <p class="description">Enter your API token to sync your lock rules</p>
+      
+      <div class="input-group">
+        <input 
+          type="password" 
+          id="api-token-input" 
+          placeholder="Enter API token"
+          class="input"
+        />
+        <button id="save-token-btn" class="btn btn-primary">Connect</button>
+      </div>
+      
+      <div class="help-text">
+        <a href="https://focuslock.app/settings" target="_blank">
+          Get your API token from Settings
+        </a>
+      </div>
+    </div>
+    
+    <!-- Main Section -->
+    <div id="main-section" class="section" style="display: none;">
+      <!-- Current Site Status -->
+      <div class="current-site">
+        <h3>Current Site</h3>
+        <div id="current-site-info" class="site-info">
+          <div class="site-icon">🌐</div>
+          <div class="site-details">
+            <div class="site-name" id="site-name">Loading...</div>
+            <div class="site-status" id="site-status">Checking...</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Lock Rules Summary -->
+      <div class="rules-summary">
+        <h3>Active Lock Rules</h3>
+        <div id="rules-list" class="rules-list">
+          <div class="loading">Loading rules...</div>
+        </div>
+      </div>
+      
+      <!-- Actions -->
+      <div class="actions">
+        <button id="sync-btn" class="btn btn-secondary">
+          <span>🔄</span> Sync Now
+        </button>
+        <a href="https://focuslock.app/dashboard" target="_blank" class="btn btn-primary">
+          Open Dashboard
+        </a>
+      </div>
+      
+      <!-- Footer -->
+      <div class="footer">
+        <button id="disconnect-btn" class="link-btn">Disconnect</button>
+      </div>
+    </div>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>

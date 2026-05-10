@@ -9,13 +9,15 @@ A free, full-featured Progressive Web App (PWA) built with Next.js 14 that helps
 - 🎯 **Smart Lock Rules**: Timer, schedule, date-based, and nuclear mode locks
 - 🏆 **Gamification**: Streaks, badges, and weekly challenges
 - 🤝 **Buddy System**: Social accountability with real-time notifications
-- 🤖 **AI Coaching**: Behavioral insights powered by Claude API
+- 🤖 **AI Coaching** *(Optional, Paid)*: Behavioral insights powered by Claude API
 - 📊 **Statistics Dashboard**: Track usage patterns and progress
 - 🍅 **Pomodoro Timer**: Focus sessions with automatic app locking
 - 🌙 **Bedtime Mode**: Automatic locks for healthy sleep habits
 - 👨‍👩‍👧 **Family Controls**: Parental management of child accounts
 - 🌐 **Browser Extensions**: Chrome and Firefox support
 - 📱 **PWA Support**: Install as a native app with offline capabilities
+
+> **Note**: AI Coaching requires an Anthropic API key (paid service). All other features work without it. See [AI_COACHING_INFO.md](./AI_COACHING_INFO.md) for details.
 
 ## Tech Stack
 
@@ -142,11 +144,13 @@ Required environment variables (see `.env.local` for template):
 | `NEXT_PUBLIC_SUPABASE_URL` | Your Supabase project URL | Yes |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Your Supabase anonymous key | Yes |
 | `SUPABASE_SERVICE_ROLE_KEY` | Your Supabase service role key (server-side only) | Yes |
-| `ANTHROPIC_API_KEY` | Your Anthropic API key for Claude | Yes |
+| `ANTHROPIC_API_KEY` | Your Anthropic API key for Claude (**PAID SERVICE**) | **No** (Optional) |
 | `GOOGLE_CLIENT_ID` | Google OAuth client ID | Yes |
 | `GOOGLE_CLIENT_SECRET` | Google OAuth client secret | Yes |
 | `NEXT_PUBLIC_APP_URL` | Your app URL (e.g., http://localhost:3000) | Yes |
 | `CRON_SECRET` | Secret for authenticating cron jobs | Yes |
+
+**Note**: The `ANTHROPIC_API_KEY` is optional. AI coaching features will be disabled without it, but all other features work normally. See [AI_COACHING_INFO.md](./AI_COACHING_INFO.md) for details about costs and alternatives.
 
 **⚠️ Security Note**: Never commit `.env.local` to version control. The `.gitignore` file already excludes it.
 

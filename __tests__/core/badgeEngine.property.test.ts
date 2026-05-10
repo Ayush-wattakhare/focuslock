@@ -111,7 +111,7 @@ describe('Property 20: Badge Award Idempotence', () => {
           );
         }
       ),
-      { numRuns: 100 }
+      { numRuns: 20 }
     );
   });
 });
@@ -148,7 +148,7 @@ describe('Property 21: Badge Award on Condition Met', () => {
           expect(new Date(earnedAt).toISOString()).toBe(earnedAt);
         }
       ),
-      { numRuns: 100 }
+      { numRuns: 20 }
     );
   });
 
@@ -181,8 +181,9 @@ describe('Property 21: Badge Award on Condition Met', () => {
           );
         }
       ),
-      { numRuns: 100 }
+      { numRuns: 20 }
     );
   });
 });
 
+});

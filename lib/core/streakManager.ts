@@ -16,7 +16,6 @@
  */
 
 import { createClient } from '@/lib/supabase/server';
-import type { Streak } from '@/types';
 
 /**
  * Result of checking and updating all user streaks
@@ -72,11 +71,11 @@ export async function checkAndUpdateStreaks(): Promise<StreakCheckResult> {
         await notifyBuddyStreakBroken(user.id);
       } else {
         // Increment streak
-        const newStreak = await incrementStreak(user.id, yesterday);
+        await incrementStreak(user.id, yesterday);
         streaksIncremented++;
         
         // Check for badge awards
-        await checkStreakBadges(user.id, newStreak);
+        await checkStreakBadges(user.id);
       }
     } catch (error) {
       errors.push({
@@ -204,9 +203,8 @@ async function checkOverrideOnDate(userId: string, date: Date): Promise<boolean>
  * - social_detox: 30-day streak
  * 
  * @param userId - User ID to check badges for
- * @param currentStreak - Current streak value
  */
-async function checkStreakBadges(userId: string, currentStreak: number): Promise<void> {
+async function checkStreakBadges(userId: string): Promise<void> {
   const supabase = await createClient();
   
   // Call database function to check and award badges

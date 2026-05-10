@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:clean": "rm -rf .next && next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -16,13 +17,19 @@
   "dependencies": {
     "@supabase/ssr": "^0.5.2",
     "@supabase/supabase-js": "^2.45.7",
+    "html2canvas": "^1.4.1",
     "next": "14.2.35",
+    "next-pwa": "^5.6.0",
     "react": "^18",
     "react-dom": "^18",
     "zod": "^4.3.6"
   },
   "devDependencies": {
     "@fast-check/jest": "^2.2.0",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/html2canvas": "^0.5.35",
     "@types/jest": "^30.0.0",
     "@types/node": "^20",
     "@types/react": "^18",
@@ -33,6 +40,7 @@
     "eslint-config-prettier": "^10.1.8",
     "fast-check": "^4.7.0",
     "jest": "^30.3.0",
+    "jest-environment-jsdom": "^30.3.0",
     "prettier": "^3.8.3",
     "ts-jest": "^29.4.9",
     "typescript": "^5"

@@ -18,6 +18,10 @@ export interface Database {
           full_name: string | null
           avatar_url: string | null
           timezone: string
+          notify_unlock: boolean
+          notify_buddy_override: boolean
+          notify_streak_broken: boolean
+          notify_badge_earned: boolean
           created_at: string
         }
         Insert: {
@@ -25,6 +29,10 @@ export interface Database {
           full_name?: string | null
           avatar_url?: string | null
           timezone?: string
+          notify_unlock?: boolean
+          notify_buddy_override?: boolean
+          notify_streak_broken?: boolean
+          notify_badge_earned?: boolean
           created_at?: string
         }
         Update: {
@@ -32,6 +40,10 @@ export interface Database {
           full_name?: string | null
           avatar_url?: string | null
           timezone?: string
+          notify_unlock?: boolean
+          notify_buddy_override?: boolean
+          notify_streak_broken?: boolean
+          notify_badge_earned?: boolean
           created_at?: string
         }
       }
@@ -458,6 +470,8 @@ export type ProfileInsert = Database['public']['Tables']['profiles']['Insert']
 export type LockRuleInsert = Database['public']['Tables']['lock_rules']['Insert']
 export type OverrideLogInsert = Database['public']['Tables']['override_logs']['Insert']
 export type UsageSessionInsert = Database['public']['Tables']['usage_sessions']['Insert']
+export type WeeklyChallengeInsert = Database['public']['Tables']['weekly_challenges']['Insert']
+export type PomodoroSessionInsert = Database['public']['Tables']['pomodoro_sessions']['Insert']
 
 // Update types
 export type ProfileUpdate = Database['public']['Tables']['profiles']['Update']

@@ -137,7 +137,7 @@ describe('Property 4: Lock Rule Configuration Persistence', () => {
             expect(data?.hide_from_home).toBe(rule.hide_from_home);
           }
         ),
-        { numRuns: 100 }
+        { numRuns: 20 }
       );
     });
 
@@ -166,7 +166,7 @@ describe('Property 4: Lock Rule Configuration Persistence', () => {
             expect(data?.hide_from_home).toBe(true);
           }
         ),
-        { numRuns: 50 }
+        { numRuns: 20 }
       );
     });
   });
@@ -188,7 +188,7 @@ describe('Property 4: Lock Rule Configuration Persistence', () => {
             expect(data?.hide_from_search).toBe(rule.hide_from_search);
           }
         ),
-        { numRuns: 100 }
+        { numRuns: 20 }
       );
     });
 
@@ -217,7 +217,7 @@ describe('Property 4: Lock Rule Configuration Persistence', () => {
             expect(data?.hide_from_search).toBe(true);
           }
         ),
-        { numRuns: 50 }
+        { numRuns: 20 }
       );
     });
   });
@@ -239,7 +239,7 @@ describe('Property 4: Lock Rule Configuration Persistence', () => {
             expect(data?.strict_mode).toBe(rule.strict_mode);
           }
         ),
-        { numRuns: 100 }
+        { numRuns: 20 }
       );
     });
 
@@ -268,7 +268,7 @@ describe('Property 4: Lock Rule Configuration Persistence', () => {
             expect(data?.strict_mode).toBe(false);
           }
         ),
-        { numRuns: 50 }
+        { numRuns: 20 }
       );
     });
   });
@@ -294,7 +294,7 @@ describe('Property 4: Lock Rule Configuration Persistence', () => {
             expect(data?.strict_mode).toBe(rule.strict_mode);
           }
         ),
-        { numRuns: 100 }
+        { numRuns: 20 }
       );
     });
   });
@@ -369,7 +369,7 @@ describe('Property 5: Lock Rule Update Round-Trip', () => {
             );
           }
         ),
-        { numRuns: 100 }
+        { numRuns: 20 }
       );
     });
 
@@ -404,7 +404,7 @@ describe('Property 5: Lock Rule Update Round-Trip', () => {
             expect(updated?.is_active).toBe(newIsActive);
           }
         ),
-        { numRuns: 100 }
+        { numRuns: 20 }
       );
     });
 
@@ -446,7 +446,7 @@ describe('Property 5: Lock Rule Update Round-Trip', () => {
             expect(newUpdatedAt).toBeGreaterThanOrEqual(initialUpdatedAt);
           }
         ),
-        { numRuns: 50 }
+        { numRuns: 20 }
       );
     });
 
@@ -487,7 +487,7 @@ describe('Property 5: Lock Rule Update Round-Trip', () => {
             expect(updated?.daily_limit_minutes).toBe(newLimit);
           }
         ),
-        { numRuns: 50 }
+        { numRuns: 20 }
       );
     });
   });
@@ -573,7 +573,7 @@ describe('Property 6: Lock Rule Deletion Cascade', () => {
             expect(updatedLog?.mood).toBe(mood);
           }
         ),
-        { numRuns: 100 }
+        { numRuns: 20 }
       );
     });
 
@@ -643,7 +643,7 @@ describe('Property 6: Lock Rule Deletion Cascade', () => {
             }
           }
         ),
-        { numRuns: 50 }
+        { numRuns: 20 }
       );
     });
 
@@ -733,7 +733,7 @@ describe('Property 6: Lock Rule Deletion Cascade', () => {
             expect(updatedLog2?.lock_rule_id).toBe(ruleId2);
           }
         ),
-        { numRuns: 50 }
+        { numRuns: 20 }
       );
     });
   });

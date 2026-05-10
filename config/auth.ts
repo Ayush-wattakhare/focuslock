@@ -2,16 +2,11 @@
 // Centralized auth settings for FocusLock
 
 export const authConfig = {
-  // Routes that require authentication
+  // Routes that require authentication (EMPTY - login is optional)
+  // Users can access all features without login
+  // Data will be stored locally and can be synced when they sign in
   protectedRoutes: [
-    '/dashboard',
-    '/stats',
-    '/settings',
-    '/rules',
-    '/buddy',
-    '/pomodoro',
-    '/challenges',
-    '/badges',
+    // No protected routes - all features available without login
   ],
   
   // Routes that should redirect to dashboard if already authenticated
