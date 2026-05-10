@@ -2,6 +2,9 @@ import withPWA from 'next-pwa';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Turbopack configuration for Next.js 16
+  turbopack: {},
+  
   // Skip static optimization for pages that need runtime environment variables
   experimental: {
     // This ensures auth pages are not statically generated
@@ -55,7 +58,16 @@ const nextConfig = {
 
   // Image optimization
   images: {
-    domains: ['supabase.co', 'lh3.googleusercontent.com'], // For Supabase storage and Google avatars
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**.supabase.co',
+      },
+      {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
+      },
+    ],
     formats: ['image/avif', 'image/webp'],
   },
 
