@@ -155,25 +155,21 @@ export default function AppGrid({
         .app-grid {
           display: grid;
           grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-          gap: 20px;
-          padding: 20px;
-          max-width: 1200px;
-          margin: 0 auto;
+          gap: 16px;
+          padding: 0;
         }
 
         @media (max-width: 768px) {
           .app-grid {
             grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            gap: 15px;
-            padding: 15px;
+            gap: 12px;
           }
         }
 
         @media (max-width: 480px) {
           .app-grid {
-            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 10px;
-            padding: 10px;
           }
         }
 
@@ -182,44 +178,53 @@ export default function AppGrid({
           display: flex;
           flex-direction: column;
           align-items: center;
-          padding: 15px;
-          background: #ffffff;
-          border: 2px solid #e0e0e0;
-          border-radius: 12px;
+          padding: 16px 12px;
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(10px);
+          border: 2px solid rgba(255, 255, 255, 0.8);
+          border-radius: 20px;
           cursor: pointer;
-          transition: all 0.2s ease;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           min-height: 140px;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
         }
 
         .app-card:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-          border-color: #4a90e2;
+          transform: translateY(-4px) scale(1.02);
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+          border-color: rgba(102, 126, 234, 0.5);
         }
 
         .app-card:focus {
-          outline: 2px solid #4a90e2;
+          outline: 2px solid #667eea;
           outline-offset: 2px;
         }
 
         .app-card.locked {
-          border-color: #ff6b6b;
-          background: #fff5f5;
+          border-color: rgba(255, 107, 107, 0.4);
+          background: linear-gradient(135deg, rgba(255, 245, 245, 0.95) 0%, rgba(255, 255, 255, 0.95) 100%);
         }
 
         .app-card.locked:hover {
-          border-color: #ff4757;
+          border-color: rgba(255, 107, 107, 0.6);
+          box-shadow: 0 8px 25px rgba(255, 107, 107, 0.15);
         }
 
         .app-icon {
-          width: 60px;
-          height: 60px;
-          margin-bottom: 10px;
-          border-radius: 12px;
+          width: 64px;
+          height: 64px;
+          margin-bottom: 12px;
+          border-radius: 16px;
           overflow: hidden;
           display: flex;
           align-items: center;
           justify-content: center;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .app-card:hover .app-icon {
+          transform: scale(1.05);
         }
 
         .app-icon img {
@@ -236,13 +241,13 @@ export default function AppGrid({
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 28px;
+          font-size: 32px;
           font-weight: bold;
         }
 
         .app-name {
           font-size: 14px;
-          font-weight: 500;
+          font-weight: 600;
           text-align: center;
           color: #333;
           word-break: break-word;
@@ -251,17 +256,27 @@ export default function AppGrid({
 
         .lock-badge {
           position: absolute;
-          top: 8px;
-          right: 8px;
-          width: 32px;
-          height: 32px;
-          background: rgba(255, 107, 107, 0.95);
+          top: 10px;
+          right: 10px;
+          width: 36px;
+          height: 36px;
+          background: linear-gradient(135deg, #ff6b6b 0%, #ff4757 100%);
           border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
           color: white;
-          box-shadow: 0 2px 8px rgba(255, 107, 107, 0.4);
+          box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+          animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+          0%, 100% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(1.05);
+          }
         }
 
         .lock-info {
@@ -270,16 +285,18 @@ export default function AppGrid({
           bottom: 100%;
           left: 50%;
           transform: translateX(-50%);
-          background: rgba(0, 0, 0, 0.9);
+          background: rgba(0, 0, 0, 0.92);
+          backdrop-filter: blur(10px);
           color: white;
-          padding: 8px 12px;
-          border-radius: 6px;
+          padding: 10px 14px;
+          border-radius: 10px;
           font-size: 12px;
           white-space: nowrap;
-          margin-bottom: 8px;
+          margin-bottom: 10px;
           z-index: 10;
           flex-direction: column;
           gap: 4px;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
 
         .app-card:hover .lock-info {
@@ -293,11 +310,11 @@ export default function AppGrid({
           left: 50%;
           transform: translateX(-50%);
           border: 6px solid transparent;
-          border-top-color: rgba(0, 0, 0, 0.9);
+          border-top-color: rgba(0, 0, 0, 0.92);
         }
 
         .lock-reason {
-          font-weight: 500;
+          font-weight: 600;
         }
 
         .unlock-time {
@@ -313,11 +330,60 @@ export default function AppGrid({
           min-height: 300px;
           color: #666;
           font-size: 16px;
+          background: rgba(255, 255, 255, 0.6);
+          backdrop-filter: blur(10px);
+          border-radius: 20px;
+          padding: 40px 20px;
         }
 
         .app-grid-empty {
           flex-direction: column;
-          gap: 10px;
+          gap: 12px;
+        }
+
+        @media (max-width: 480px) {
+          .app-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+          }
+
+          .app-icon-placeholder {
+            font-size: 28px;
+          }
+
+          .app-name {
+            font-size: 13px;
+          }
+
+          .lock-badge {
+            width: 32px;
+            height: 32px;
+            top: 8px;
+            right: 8px;
+          }
+
+          .lock-badge svg {
+            width: 18px;
+            height: 18px;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .app-card,
+          .app-icon,
+          .lock-badge {
+            transition: none;
+            animation: none;
+          }
+
+          .app-card:hover {
+            transform: none;
+          }
+
+          .app-card:hover .app-icon {
+            transform: none;
+          }
         }
       `}</style>
     </div>

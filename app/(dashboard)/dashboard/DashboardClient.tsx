@@ -304,19 +304,30 @@ export default function DashboardClient({ user, profile, initialRules }: Dashboa
       </main>
 
       <style jsx>{`
-        /* Mobile-first responsive design */
+        /* Mobile-first responsive design with modern aesthetics */
         .dashboard-container {
           min-height: 100vh;
-          background-color: #f5f7fa;
+          background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+          position: relative;
+        }
+
+        .dashboard-container::before {
+          content: '';
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 280px;
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          z-index: 0;
         }
 
         .dashboard-header {
-          background-color: white;
-          border-bottom: 1px solid #e0e0e0;
-          padding: 16px 20px;
-          position: sticky;
-          top: 0;
-          z-index: 100;
+          background: transparent;
+          border-bottom: none;
+          padding: 20px;
+          position: relative;
+          z-index: 10;
         }
 
         .header-content {
@@ -330,61 +341,52 @@ export default function DashboardClient({ user, profile, initialRules }: Dashboa
 
         .header-title h1 {
           margin: 0;
-          font-size: 18px;
-          font-weight: 600;
-          color: #333;
+          font-size: 20px;
+          font-weight: 700;
+          color: white;
+          text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
 
         .welcome-text {
           margin: 4px 0 0 0;
-          color: #666;
-          font-size: 13px;
+          color: rgba(255, 255, 255, 0.95);
+          font-size: 14px;
+          text-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
         }
 
-        .signout-btn {
-          padding: 8px 16px;
-          background-color: #dc3545;
-          color: white;
-          border: none;
-          border-radius: 6px;
-          cursor: pointer;
-          font-size: 13px;
-          font-weight: 500;
-          white-space: nowrap;
-          transition: background-color 0.2s;
-        }
-
-        .signout-btn:hover {
-          background-color: #c82333;
-        }
-
-        .signout-btn:active {
-          transform: scale(0.98);
-        }
-
+        .signout-btn,
         .signin-btn {
-          padding: 8px 16px;
-          background-color: #4a90e2;
+          padding: 10px 20px;
+          background: rgba(255, 255, 255, 0.2);
+          backdrop-filter: blur(10px);
           color: white;
-          border: none;
-          border-radius: 6px;
+          border: 1px solid rgba(255, 255, 255, 0.4);
+          border-radius: 50px;
           cursor: pointer;
-          font-size: 13px;
-          font-weight: 500;
+          font-size: 14px;
+          font-weight: 600;
           white-space: nowrap;
-          transition: background-color 0.2s;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
+        .signout-btn:hover,
         .signin-btn:hover {
-          background-color: #357abd;
+          background: rgba(255, 255, 255, 0.3);
+          border-color: rgba(255, 255, 255, 0.6);
+          transform: translateY(-2px);
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
         }
 
+        .signout-btn:active,
         .signin-btn:active {
-          transform: scale(0.98);
+          transform: translateY(0);
         }
 
         .dashboard-main {
           padding: 20px;
+          position: relative;
+          z-index: 1;
         }
 
         .dashboard-content {
@@ -400,50 +402,86 @@ export default function DashboardClient({ user, profile, initialRules }: Dashboa
         }
 
         .stat-card {
-          background-color: white;
-          border-radius: 12px;
-          padding: 20px;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+          background: rgba(255, 255, 255, 0.98);
+          backdrop-filter: blur(20px);
+          border-radius: 20px;
+          padding: 24px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 1px 8px rgba(0, 0, 0, 0.05);
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .stat-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 4px;
+          background: linear-gradient(90deg, #667eea, #764ba2);
+          transform: scaleX(0);
+          transition: transform 0.3s;
+        }
+
+        .stat-card:hover::before {
+          transform: scaleX(1);
+        }
+
+        .stat-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15), 0 5px 15px rgba(0, 0, 0, 0.08);
         }
 
         .streak-card {
-          border: 2px solid #4a90e2;
+          border: none;
         }
 
         .badges-card {
-          border: 2px solid #ffa726;
+          border: none;
         }
 
         .actions-card {
-          border: 2px solid #66bb6a;
+          border: none;
         }
 
         .stat-card-header {
           display: flex;
           align-items: center;
-          gap: 12px;
-          margin-bottom: 16px;
+          gap: 14px;
+          margin-bottom: 18px;
         }
 
         .stat-card-header-simple {
-          margin-bottom: 16px;
+          margin-bottom: 18px;
         }
 
         .stat-icon {
-          font-size: 28px;
+          font-size: 32px;
           line-height: 1;
+          filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+          animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-5px);
+          }
         }
 
         .stat-title {
           margin: 0 0 2px 0;
-          font-size: 15px;
-          font-weight: 600;
+          font-size: 16px;
+          font-weight: 700;
           color: #333;
         }
 
         .stat-subtitle {
           margin: 0;
-          font-size: 12px;
+          font-size: 13px;
           color: #666;
         }
 
@@ -452,24 +490,35 @@ export default function DashboardClient({ user, profile, initialRules }: Dashboa
         }
 
         .stat-value {
-          margin: 0 0 8px 0;
-          font-size: 32px;
-          font-weight: 700;
+          margin: 0 0 10px 0;
+          font-size: 40px;
+          font-weight: 800;
           line-height: 1;
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
         }
 
         .streak-value {
-          color: #4a90e2;
+          background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
         }
 
         .badges-value {
-          color: #ffa726;
+          background: linear-gradient(135deg, #ffa726 0%, #f57c00 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
         }
 
         .stat-detail {
           margin: 0;
-          font-size: 13px;
+          font-size: 14px;
           color: #666;
+          font-weight: 500;
         }
 
         .loading-text {
@@ -479,43 +528,61 @@ export default function DashboardClient({ user, profile, initialRules }: Dashboa
         }
 
         .view-badges-btn {
-          padding: 8px 14px;
-          background-color: transparent;
-          color: #ffa726;
-          border: 1px solid #ffa726;
-          border-radius: 6px;
+          padding: 10px 16px;
+          background: linear-gradient(135deg, #ffa726 0%, #f57c00 100%);
+          color: white;
+          border: none;
+          border-radius: 50px;
           cursor: pointer;
-          font-size: 13px;
-          font-weight: 500;
-          transition: all 0.2s;
+          font-size: 14px;
+          font-weight: 600;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           width: 100%;
+          box-shadow: 0 4px 15px rgba(255, 167, 38, 0.3);
         }
 
         .view-badges-btn:hover {
-          background-color: #ffa726;
-          color: white;
+          transform: translateY(-2px);
+          box-shadow: 0 6px 20px rgba(255, 167, 38, 0.4);
         }
 
         .actions-buttons {
           display: flex;
           flex-direction: column;
-          gap: 10px;
+          gap: 12px;
         }
 
         .action-btn {
-          padding: 12px 16px;
+          padding: 14px 18px;
           color: white;
           border: none;
-          border-radius: 6px;
+          border-radius: 50px;
           cursor: pointer;
-          font-size: 14px;
-          font-weight: 500;
+          font-size: 15px;
+          font-weight: 600;
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 8px;
-          transition: all 0.2s;
+          gap: 10px;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           width: 100%;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .action-btn::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+          transition: left 0.5s;
+        }
+
+        .action-btn:hover::before {
+          left: 100%;
         }
 
         .action-btn:active {
@@ -523,19 +590,23 @@ export default function DashboardClient({ user, profile, initialRules }: Dashboa
         }
 
         .add-rule-btn {
-          background-color: #4a90e2;
+          background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+          box-shadow: 0 4px 15px rgba(74, 144, 226, 0.3);
         }
 
         .add-rule-btn:hover {
-          background-color: #357abd;
+          transform: translateY(-2px);
+          box-shadow: 0 6px 20px rgba(74, 144, 226, 0.4);
         }
 
         .pomodoro-btn {
-          background-color: #66bb6a;
+          background: linear-gradient(135deg, #66bb6a 0%, #4caf50 100%);
+          box-shadow: 0 4px 15px rgba(102, 187, 106, 0.3);
         }
 
         .pomodoro-btn:hover {
-          background-color: #4caf50;
+          transform: translateY(-2px);
+          box-shadow: 0 6px 20px rgba(102, 187, 106, 0.4);
         }
 
         .action-btn-text {
@@ -543,86 +614,95 @@ export default function DashboardClient({ user, profile, initialRules }: Dashboa
         }
 
         .apps-section-header {
-          background-color: white;
-          border-radius: 12px;
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(20px);
+          border-radius: 16px;
           padding: 20px;
           margin-bottom: 20px;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
         }
 
         .apps-title {
           margin: 0 0 6px 0;
-          font-size: 18px;
-          font-weight: 600;
-          color: #333;
+          font-size: 20px;
+          font-weight: 700;
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
         }
 
         .apps-subtitle {
           margin: 0;
           color: #666;
           font-size: 14px;
+          font-weight: 500;
         }
 
         .empty-state {
-          background-color: white;
-          border-radius: 12px;
-          padding: 40px 20px;
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(20px);
+          border-radius: 20px;
+          padding: 50px 20px;
           text-align: center;
           margin-top: 24px;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
 
         .empty-state-title {
-          margin: 0 0 10px 0;
-          font-size: 18px;
-          font-weight: 600;
+          margin: 0 0 12px 0;
+          font-size: 20px;
+          font-weight: 700;
           color: #333;
         }
 
         .empty-state-text {
-          margin: 0 0 20px 0;
+          margin: 0 0 24px 0;
           color: #666;
-          font-size: 14px;
+          font-size: 15px;
+          line-height: 1.6;
         }
 
         .empty-state-btn {
-          padding: 12px 24px;
-          background-color: #4a90e2;
+          padding: 14px 28px;
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
           color: white;
           border: none;
-          border-radius: 6px;
+          border-radius: 50px;
           cursor: pointer;
-          font-size: 14px;
-          font-weight: 500;
-          transition: background-color 0.2s;
+          font-size: 15px;
+          font-weight: 600;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
         }
 
         .empty-state-btn:hover {
-          background-color: #357abd;
+          transform: translateY(-2px);
+          box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
         }
 
         /* Tablet breakpoint (768px+) */
         @media (min-width: 768px) {
+          .dashboard-container::before {
+            height: 300px;
+          }
+
           .dashboard-header {
-            padding: 20px 32px;
+            padding: 24px 32px;
           }
 
           .header-title h1 {
-            font-size: 22px;
+            font-size: 24px;
           }
 
           .welcome-text {
-            font-size: 14px;
+            font-size: 15px;
           }
 
-          .signout-btn {
-            padding: 10px 20px;
-            font-size: 14px;
-          }
-
+          .signout-btn,
           .signin-btn {
-            padding: 10px 20px;
-            font-size: 14px;
+            padding: 12px 24px;
+            font-size: 15px;
           }
 
           .dashboard-main {
@@ -632,23 +712,23 @@ export default function DashboardClient({ user, profile, initialRules }: Dashboa
           .stats-grid {
             grid-template-columns: repeat(2, 1fr);
             gap: 20px;
-            margin-bottom: 30px;
+            margin-bottom: 32px;
           }
 
           .stat-card {
-            padding: 24px;
+            padding: 28px;
           }
 
           .stat-icon {
-            font-size: 32px;
+            font-size: 36px;
           }
 
           .stat-title {
-            font-size: 16px;
+            font-size: 17px;
           }
 
           .stat-value {
-            font-size: 36px;
+            font-size: 44px;
           }
 
           .apps-section-header {
@@ -657,23 +737,27 @@ export default function DashboardClient({ user, profile, initialRules }: Dashboa
           }
 
           .apps-title {
-            font-size: 20px;
+            font-size: 22px;
           }
 
           .empty-state {
-            padding: 50px 30px;
-            margin-top: 30px;
+            padding: 60px 40px;
+            margin-top: 32px;
+          }
+
+          .empty-state-title {
+            font-size: 22px;
           }
         }
 
         /* Desktop breakpoint (1024px+) */
         @media (min-width: 1024px) {
           .dashboard-header {
-            padding: 20px 40px;
+            padding: 24px 40px;
           }
 
           .header-title h1 {
-            font-size: 24px;
+            font-size: 26px;
           }
 
           .dashboard-main {
@@ -682,6 +766,11 @@ export default function DashboardClient({ user, profile, initialRules }: Dashboa
 
           .stats-grid {
             grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+          }
+
+          .stat-card {
+            padding: 32px;
           }
 
           .actions-buttons {
@@ -693,14 +782,26 @@ export default function DashboardClient({ user, profile, initialRules }: Dashboa
           }
 
           .apps-section-header {
-            padding: 30px;
+            padding: 28px;
+          }
+
+          .apps-title {
+            font-size: 24px;
           }
         }
 
         /* Large desktop (1440px+) */
         @media (min-width: 1440px) {
           .stat-card {
-            padding: 28px;
+            padding: 36px;
+          }
+
+          .stat-icon {
+            font-size: 40px;
+          }
+
+          .stat-value {
+            font-size: 48px;
           }
         }
 
@@ -711,7 +812,7 @@ export default function DashboardClient({ user, profile, initialRules }: Dashboa
           .signin-btn,
           .view-badges-btn,
           .empty-state-btn {
-            min-height: 44px;
+            min-height: 48px;
           }
         }
 
@@ -721,13 +822,20 @@ export default function DashboardClient({ user, profile, initialRules }: Dashboa
           .signin-btn,
           .action-btn,
           .view-badges-btn,
-          .empty-state-btn {
+          .empty-state-btn,
+          .stat-card,
+          .stat-icon {
             transition: none;
+            animation: none;
           }
 
           .action-btn:active,
           .signout-btn:active,
           .signin-btn:active {
+            transform: none;
+          }
+
+          .stat-card:hover {
             transform: none;
           }
         }

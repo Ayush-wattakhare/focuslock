@@ -6,6 +6,39 @@
   min-height: 100vh;
   padding: 2rem;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.page::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  animation: float 20s ease-in-out infinite;
+}
+
+.page::after {
+  content: '';
+  position: absolute;
+  bottom: -50%;
+  left: -50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+  animation: float 25s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(30px, 30px) scale(1.1);
+  }
 }
 
 .main {
@@ -15,133 +48,314 @@
   gap: 2rem;
   max-width: 1200px;
   width: 100%;
+  position: relative;
+  z-index: 1;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .title {
   font-size: 4rem;
-  font-weight: 700;
+  font-weight: 800;
   color: white;
   margin: 0;
   text-align: center;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  letter-spacing: -0.02em;
+  animation: slideInDown 0.6s ease-out;
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .subtitle {
   font-size: 1.5rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.95);
   margin: 0;
   text-align: center;
+  font-weight: 400;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.8s ease-out 0.2s both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .cta {
-  margin: 1rem 0;
+  margin: 1.5rem 0;
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
   justify-content: center;
+  animation: fadeIn 1s ease-out 0.4s both;
 }
 
 .ctaButton {
-  display: inline-block;
-  padding: 1rem 3rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.125rem 3rem;
   font-size: 1.2rem;
-  font-weight: 600;
+  font-weight: 700;
   color: #667eea;
   background: white;
   border-radius: 50px;
   text-decoration: none;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), 0 4px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.ctaButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.ctaButton:hover::before {
+  left: 100%;
 }
 
 .ctaButton:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25), 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.ctaButton:active {
+  transform: translateY(-1px) scale(1);
 }
 
 .ctaButtonSecondary {
-  display: inline-block;
-  padding: 1rem 3rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.125rem 3rem;
   font-size: 1.2rem;
-  font-weight: 600;
+  font-weight: 700;
   color: white;
-  background: rgba(255, 255, 255, 0.2);
-  border: 2px solid white;
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.8);
   border-radius: 50px;
   text-decoration: none;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   backdrop-filter: blur(10px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .ctaButtonSecondary:hover {
-  background: rgba(255, 255, 255, 0.3);
-  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.25);
+  border-color: white;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+.ctaButtonSecondary:active {
+  transform: translateY(-1px) scale(1);
 }
 
 .note {
   margin-top: 2rem;
-  padding: 1rem 2rem;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
+  padding: 1.25rem 2.5rem;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
   border-radius: 50px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 1.2s ease-out 0.6s both;
 }
 
 .note p {
   margin: 0;
   color: white;
-  font-size: 1rem;
+  font-size: 1.05rem;
   text-align: center;
+  font-weight: 500;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .features {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
   width: 100%;
-  margin-top: 2rem;
+  margin-top: 3rem;
+  animation: fadeIn 1.4s ease-out 0.8s both;
 }
 
 .feature {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border-radius: 1rem;
-  padding: 2rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: transform 0.2s ease;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(15px);
+  border-radius: 1.5rem;
+  padding: 2.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.feature::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.5));
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.feature:hover::before {
+  transform: scaleX(1);
 }
 
 .feature:hover {
-  transform: translateY(-4px);
+  transform: translateY(-8px) scale(1.02);
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
 }
 
 .feature h3 {
-  font-size: 1.5rem;
-  margin: 0 0 0.5rem 0;
+  font-size: 1.75rem;
+  margin: 0 0 1rem 0;
   color: white;
+  font-weight: 700;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .feature p {
-  font-size: 1rem;
+  font-size: 1.05rem;
   margin: 0;
-  color: rgba(255, 255, 255, 0.8);
-  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
 }
 
 @media (max-width: 768px) {
+  .page {
+    padding: 1.5rem 1rem;
+  }
+
   .title {
     font-size: 2.5rem;
+    letter-spacing: -0.01em;
   }
 
   .subtitle {
     font-size: 1.2rem;
+    padding: 0 1rem;
+  }
+
+  .cta {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.75rem;
+  }
+
+  .ctaButton,
+  .ctaButtonSecondary {
+    width: 100%;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+  }
+
+  .note {
+    margin-top: 1.5rem;
+    padding: 1rem 1.5rem;
+  }
+
+  .note p {
+    font-size: 0.95rem;
   }
 
   .features {
     grid-template-columns: 1fr;
+    gap: 1.25rem;
+    margin-top: 2rem;
   }
-  
-  .ctaButton {
-    padding: 0.875rem 2rem;
+
+  .feature {
+    padding: 2rem;
+  }
+
+  .feature h3 {
+    font-size: 1.5rem;
+  }
+
+  .feature p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .page {
+    padding: 1rem 0.75rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
     font-size: 1.1rem;
+  }
+
+  .ctaButton,
+  .ctaButtonSecondary {
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .note {
+    padding: 0.875rem 1.25rem;
+    border-radius: 30px;
+  }
+
+  .note p {
+    font-size: 0.9rem;
+  }
+
+  .feature {
+    padding: 1.75rem;
+  }
+
+  .feature h3 {
+    font-size: 1.35rem;
+  }
+
+  .feature p {
+    font-size: 0.95rem;
   }
 }
